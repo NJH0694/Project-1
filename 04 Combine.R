@@ -28,7 +28,8 @@ ds <- read_csv(file_tidy, col_names=name, col_types = type, skip = 1)
 ds2 <- ds %>%
   mutate(date = my(ds$date))
 ds3 <- ds2 %>%
-  mutate(extruder_date = dmy(paste0(test0$extruder_date,"/",year(test1$date))))
+  mutate(extruder_date = dmy(paste0(ds2$extruder_date,"/",year(ds2$date))))
+ds3
 
 #Save to single database file
 write_csv(ds3,path='database.csv', append = FALSE)
