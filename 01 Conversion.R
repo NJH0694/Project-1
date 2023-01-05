@@ -21,3 +21,9 @@ repeat{
     break
   }
 }
+
+# Clear data
+rm(list = ls())  # Removes all objects from environment
+
+# Clear packages
+pacman::p_unload(all)  # Remove all contributed packages
