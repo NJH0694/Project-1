@@ -33,9 +33,7 @@ df4[8] <- str_remove(df4$V4,"\\*")
 #Convert all NA to 0
 df5 <- as_tibble(df4) %>%
   mutate_all(~replace(.,is.na(.), 0))
-df5
 
 #Write into 'Tidy Data' folder
 df5 %>%
   write_csv(path=file_tidy, append = FALSE)
-
