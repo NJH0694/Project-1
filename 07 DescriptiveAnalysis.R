@@ -29,13 +29,20 @@ cf4 <- cf3 %>%
   mutate(other_crack = other_crack / total_pipe *100) %>%
   mutate(other = other / total_pipe *100)
 
+cf4 %<>%
+  mutate(kiln = case_when(kiln == "L" ~ 1, 
+                          kiln == "G1" ~ 2, 
+                          kiln == "G2" ~ 3)) %>%
+  mutate(kiln = as.integer(kiln)) %>%
+  print()
+
 cf4 %>%
-  select(-2 & -8) %>%
+  select(-8) %>%
   cor() %>%
   round(2)
 
 cf4 %>%
-  select(-2 & -8 & -15:-17) %>%
+  select(-8 & -15:-17) %>%
   cor() %>%
   round(2) %>%
   corrplot(
@@ -48,7 +55,7 @@ cf4 %>%
   filter(product == "DN150") %>%
   filter(extruder_num == 1 | extruder_num == 3) %>%
   filter(dryer_num > 5) %>%
-  select(-2 & -8 & -15:-17) %>%
+  select(-8 & -15:-17) %>%
   cor() %>%
   round(2) %>%
   corrplot(
@@ -61,7 +68,7 @@ cf4 %>%
   filter(product == "DN225/175") %>%
   filter(extruder_num == 2 | extruder_num == 7) %>%
   filter(dryer_num > 5) %>%
-  select(-2 & -8 & -15:-17) %>%
+  select(-8 & -15:-17) %>%
   cor() %>%
   round(2) %>%
   corrplot(
@@ -76,6 +83,8 @@ cf5 <- cf4 %>%
   filter(dryer_num > 5) %>%
   mutate(extruder_num = as.factor(extruder_num)) %>%
   mutate(dryer_num = as.factor(dryer_num)) %>%
+  mutate(kiln = as.factor(kiln)) %>%
+  mutate(firing_zone = as.factor(firing_zone)) %>%
   group_by(batch) %>%
   print()
 
@@ -84,15 +93,36 @@ cf5 %>%
   ggplot(aes(x=extruder_num, y=bend_pipe, fill=kiln)) +
   geom_boxplot()
 
+#t.test for 2 variable
+t.test(bend_pipe ~ extruder_num, data=cf5)
+
 #ANOVA analysis
+#Relationship between bend pipe and dryer number
 fit <-
   aov(
-    bend_pipe ~ extruder_num,
+    bend_pipe ~ dryer_num,
     data = cf5
   )
 fit
 fit %>% summary()
 fit %>% TukeyHSD()
 
+#Relationship between bend pipe and kiln
+fit2 <-
+  aov(
+    bend_pipe ~ kiln,
+    data = cf5
+  )
+fit2
+fit2 %>% summary()
+fit2 %>% TukeyHSD()
 
-ggpairs(cf5)
+#Relationship between bend pipe and kiln
+fit3 <-
+  aov(
+    bend_pipe ~ firing_zone,
+    data = cf5
+  )
+fit3
+fit3 %>% summary()
+fit3 %>% TukeyHSD()
