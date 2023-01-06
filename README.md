@@ -1,7 +1,7 @@
-# Project-1
-R language for data wrangling, visualizing and modeling
+# Defect Analysis with Machine Learning
 
-Raw data are generated from company software and converted into tidy data.
+This project is to conduct comprehensive data analysis on product defects.
+Reports generated from company software are converted into tidy data and further conduct descriptive data analysis.
 
 #01 Conversion.R
 Create loop to call file 02 and 03 to convert raw data to csv files.
