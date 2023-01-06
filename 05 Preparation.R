@@ -1,6 +1,6 @@
 #Read packages
 library(pacman)
-p_load(tidyverse,rio,readxl,janitor,lubridate,magrittr,GGally,scales,corrplot,datasets,GPArotation,psych)
+p_load(tidyverse,rio,readxl,janitor,lubridate,magrittr,GGally,scales,corrplot,datasets,GPArotation,psych,quantreg)
 
 #Load database
 type <- 'icfiiiiiiicfiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
