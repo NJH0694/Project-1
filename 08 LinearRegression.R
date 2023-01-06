@@ -93,7 +93,7 @@ reg4 <- rq(batch ~ bend_pipe + CNT_c + explode +
 reg4 %>% summary()
 reg4 %>% summary(se = 'boot')
 
-#Binomial Logistic regression
+#Poisson or log-linear regression
 bf2 %>%
   filter(defect != "good_pipe") %>%
   ggplot(aes(percentage, fill=defect)) +
