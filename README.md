@@ -1,6 +1,7 @@
 # Project-1
-R language for data wrangling and visualizing
-Raw data generated from company software are converted into tidy data.
+R language for data wrangling, visualizing and modeling
+
+Raw data are generated from company software and converted into tidy data.
 
 #01 Conversion.R
 Create loop to call file 02 and 03 to convert raw data to csv files.
