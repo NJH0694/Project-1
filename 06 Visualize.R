@@ -9,7 +9,7 @@ df4 %>%
   group_by(batch, defect) %>%
   summarise(total = sum(count)) %>%
   ggplot(aes(x=batch,y=total)) +
-  geom_line(mapping = aes(color=defect))
+  geom_line(mapping = aes(color=defect), size = 1)
 
 df4 %>%
   group_by(batch, defect, kiln) %>%
@@ -44,55 +44,80 @@ df4 %>%
   ggplot(aes(x=defect, y=total, fill = product)) +
   geom_col()
 
-#Uncount data
-summary(df4)
+#Filter DN150 and DN225/175 for further analysis (main product)
 df5 <- df4 %>%
+  filter(product == 'DN150' | product == 'DN225/175') %>%
+  droplevels()
+
+df5 %>%
+  filter(defect != 'good_pipe') %>%
+  group_by(defect, product) %>%
+  summarise(total = sum(count)) %>%
+  ggplot(aes(x=defect, y=total, fill = product)) +
+  geom_col()
+
+df5 %>%
+  group_by(batch, defect) %>%
+  summarise(total = sum(count)) %>%
+  ggplot(aes(x=batch,y=total)) +
+  geom_line(mapping = aes(color=defect), size = 1)
+
+df5 %>%
+  filter(defect != 'good_pipe') %>%
+  group_by(batch, defect) %>%
+  summarise(total = sum(count)) %>%
+  ggplot(aes(x=batch,y=total)) +
+  geom_smooth(mapping = aes(color=defect), size = 1)
+
+#Uncount data
+summary(df5)
+df6 <- df5 %>%
   filter(!count<0) %>%
   uncount(count)
 
 #Further Visualize
-summary(df5)
+summary(df6)
 
-df5 %>%
+df6 %>%
   ggplot(aes(product, fill = defect)) +
   geom_bar()
 
-df5 %>%
+df6 %>%
   ggplot(aes(product, fill = defect)) +
   geom_bar(position = "fill") +
   scale_y_continuous(labels = percent)
 
-df5 %>%
+df6 %>%
   ggplot(aes(x=batch,fill=defect)) +
   geom_area(stat = "bin", binwidth = 3, position = "fill") +
   scale_y_continuous(labels = percent)
 
-df5 %>%
+df6 %>%
   ggplot(aes(x=batch,fill=product)) +
   geom_area(stat = "bin", binwidth = 3, position = "fill") +
   scale_y_continuous(labels = percent)
 
-df5 %>%
+df6 %>%
   ggplot(aes(x=batch,fill=product)) +
   geom_histogram(binwidth = 2)
 
-df5 %>%
+df6 %>%
   ggplot(aes(x=batch,fill=kiln)) +
   geom_histogram(binwidth = 2) +
   facet_grid(kiln ~ .)
 
-df5 %>%
+df6 %>%
   ggplot(aes(x=batch,fill=product)) +
   geom_histogram(binwidth = 2) +
   facet_grid(kiln ~ .)
 
-df5 %>%
+df6 %>%
   ggplot(aes(x=dryer_num,fill=defect)) +
   geom_histogram(binwidth = 2) +
   facet_grid(kiln ~ .)
 
 #Filter DN225/175 for further analysis (main product)
-df225 <- df5 %>%
+df225 <- df6 %>%
   filter(product == 'DN225/175') %>%
   filter(!is.na(drying_batch)) %>%
   filter(dryer_num>5) %>%
@@ -143,7 +168,3 @@ df225 %>%
   ggplot(aes(x=batch,fill=defect)) +
   geom_density(alpha = 0.5) +
   facet_grid(defect ~ .)
-
-df225 %>%
-  ggplot(aes(x=batch,y=defect)) +
-  geom_line(mapping = aes(color=kiln))
