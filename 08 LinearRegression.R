@@ -82,3 +82,31 @@ reg3 %>% confint()
 reg3 %>% predict()
 reg3 %>% plot()
 
+#Quantile regression
+reg4 <- rq(batch ~ bend_pipe + CNT_c + explode +
+             socket_issue + other_crack + other,
+           data = bf3,
+           tau = 0.5
+           ) %>%
+  print()
+
+reg4 %>% summary()
+reg4 %>% summary(se = 'boot')
+
+#Binomial Logistic regression
+bf2 %>%
+  filter(defect != "good_pipe") %>%
+  ggplot(aes(percentage, fill=defect)) +
+  geom_boxplot()
+
+bf4 <- df4 %>%
+  filter(defect != "good_pipe") %>%
+  group_by(batch, defect) %>%
+  summarise(total = sum(count))
+
+reg5 <- glm(total ~ defect,
+            data = bf4,
+            family = 'poisson'
+            )
+
+reg5 %>% summary()
