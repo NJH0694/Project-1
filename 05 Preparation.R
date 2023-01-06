@@ -44,7 +44,7 @@ names(df3)
 df3 <- df3 %>%
   select(-13:-19 & -21:-24 & -26:-36)
 df3 <- df3[,c(1:12,14,18,13,19:21,16)]
-
+summary(df3)
 #Convert to long data
 names(df3)
 df4 <- df3 %>%
@@ -56,5 +56,3 @@ df4 <- df3 %>%
 levels(df4$defect)
 df4 %<>%
   mutate(defect = fct_reorder(defect,count, .desc=TRUE))
-
-
