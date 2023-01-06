@@ -27,7 +27,8 @@ cf4 <- cf3 %>%
   mutate(explode = explode / total_pipe *100) %>%
   mutate(socket_issue = socket_issue / total_pipe *100) %>%
   mutate(other_crack = other_crack / total_pipe *100) %>%
-  mutate(other = other / total_pipe *100)
+  mutate(other = other / total_pipe *100) %>%
+  mutate(good_pipe = good_pipe / total_pipe *100)
 
 cf4 %<>%
   mutate(kiln = case_when(kiln == "L" ~ 1, 
