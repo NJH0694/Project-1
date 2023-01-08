@@ -2,7 +2,7 @@
 
 https://medium.com/@ngjenhwa01/defect-analysis-with-machine-learning-d79f4d69c3b9
 
-
+https://github.com/NJH0694/Project-1/blob/main/Plots/Rplot01.png?raw=true
 
 
 
