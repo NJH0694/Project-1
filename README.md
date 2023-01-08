@@ -1,9 +1,27 @@
 # Defect Analysis with Machine Learning
 
-This project is to conduct comprehensive data analysis on product defects.
-Reports generated from company software are converted into tidy data and further conduct descriptive data analysis.
+https://medium.com/@ngjenhwa01/defect-analysis-with-machine-learning-d79f4d69c3b9
 
-This project consists total 8 files:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+This project consists total 7 files:
 
 #01 Conversion.R
 
@@ -32,7 +50,3 @@ Plot graphs using ggplot to visualize relationship between defects and variables
 #07 DescriptiveAnalysis.R
 
 Identify correlationship between variables by using descriptive analysis such as t.test and ANOVA
-
-#08 RegressionModeling.R
-
-Create regression models
