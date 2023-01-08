@@ -2,19 +2,11 @@
 
 https://medium.com/@ngjenhwa01/defect-analysis-with-machine-learning-d79f4d69c3b9
 
-https://github.com/NJH0694/Project-1/blob/main/Plots/Rplot01.png?raw=true
+![Alt text](https://github.com/NJH0694/Project-1/blob/main/Plots/Rplot01.png?raw=true)
 
+![Alt text](https://github.com/NJH0694/Project-1/blob/main/Plots/Rplot02.png?raw=true)
 
-
-
-
-
-
-
-
-
-
-
+![Alt text](https://github.com/NJH0694/Project-1/blob/main/Plots/Rplot03.png?raw=true)
 
 
 
