@@ -1,3 +1,8 @@
+#This file is designed to be called in "01 Conversion.R"
+#Please do not run it individually
+#It writes tidied data frame into "Tidy Data/" folder
+#Please run this file after "02 Read.R" for trial run
+
 #Start to subsetting main file
 #Clear blank columns and rows
 file_read2 <- file_read %>%
@@ -5,7 +10,7 @@ file_read2 <- file_read %>%
   slice(5:60)
 
 #Transpose dataset
-df <- as_tibble(t(file_read2))
+df <- as_tibble(t(file_read2), .name_repair = 'minimal')
 
 #Remove empty columns
 df <- df[,-9]
@@ -36,4 +41,4 @@ df5 <- as_tibble(df4) %>%
 
 #Write into 'Tidy Data' folder
 df5 %>%
-  write_csv(path=file_tidy, append = FALSE)
+  write_csv(file=file_tidy, append = FALSE)

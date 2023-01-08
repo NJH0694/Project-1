@@ -1,3 +1,8 @@
+#This file is designed to be called in "01 Conversion.R"
+#Please do not run it individually
+#Please assign integer i = 1 for trial run
+#i = 1
+
 #Read raw data file name and create tidied file name
 file_raw <- paste0('Raw Data/',raw_list[i])
 file_tidy <- paste0('Tidy Data/', str_replace(raw_list[i],'xls','csv'))
@@ -18,8 +23,5 @@ v_2 <- file_read[3,1] %>%
 #Combine variables and prepare for data wrangling
 v_3 <- c(unlist(v_2),v_1)
 v_4 <- as_tibble_row(v_3,.name_repair="minimal")
-
 title <- c('batch','date','kiln')
 colnames(v_4) <- title
-
-v_4

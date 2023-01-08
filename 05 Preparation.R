@@ -1,6 +1,10 @@
+#This file is followed by '04 Combine.R'
+#The database included some blank columns and contain too many defect types
+#It needs further cleaning and simplification before visualizing
+
 #Read packages
 library(pacman)
-p_load(tidyverse,rio,readxl,janitor,lubridate,magrittr,GGally,scales,corrplot,datasets,GPArotation,psych,quantreg)
+p_load(tidyverse,rio,readxl,janitor,lubridate,magrittr,GGally,scales,corrplot,RColorBrewer)
 
 #Load database
 type <- 'icfiiiiiiicfiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
@@ -15,13 +19,14 @@ df2 <- df %>%
   select(-names(rdf))
 
 #Same method but manually
-df2 <- df %>%
-  select(-c(drying_c,body_dented,between_car_damage,limestone,insp_damage,
-            neck_crack,radial_c,lamination,lab_test,glaze_crawl,
-            remain_clay,gross_grog))
+#df2 <- df %>%
+#  select(-c(drying_c,body_dented,between_car_damage,limestone,insp_damage,
+#            neck_crack,radial_c,lamination,lab_test,glaze_crawl,
+#            remain_clay,gross_grog))
 
-glimpse(df2)
-summary(df2)
+df2 %>%
+  group_by(product) %>%
+  summarise(total = sum(total_pipe))
 
 #Visualize
 qplot(product, data=df2, geom="bar")
@@ -45,14 +50,12 @@ df3 <- df3 %>%
   select(-13:-19 & -21:-24 & -26:-36)
 df3 <- df3[,c(1:12,14,18,13,19:21,16)]
 summary(df3)
+
 #Convert to long data
 names(df3)
 df4 <- df3 %>%
   pivot_longer(cols=13:19,names_to = "defect", values_to = "count") %>%
   mutate(defect = as.factor(defect))
 
-
-#Relevel factor
-levels(df4$defect)
 df4 %<>%
-  mutate(defect = fct_reorder(defect,count, .desc=TRUE))
+  mutate(defect = fct_reorder(defect,count, .desc=FALSE))

@@ -1,6 +1,9 @@
+#This is the second file to load
+#It read all csv files in "/Tidy Data/" folder and convert into a single database file
+
 #Load package
 library(pacman)
-p_load(tidyverse,rio,readxl,janitor,lubridate,magrittr)
+p_load(tidyverse,readxl,janitor,lubridate,magrittr)
 
 #Column names
 name <- c("batch","date","kiln","kiln_car","firing_zone","drying_batch",
@@ -29,7 +32,6 @@ ds2 <- ds %>%
   mutate(date = my(ds$date))
 ds3 <- ds2 %>%
   mutate(extruder_date = dmy(paste0(ds2$extruder_date,"/",year(ds2$date))))
-ds3
 
 #Save to single database file
 write_csv(ds3,path='database.csv', append = FALSE)

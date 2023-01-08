@@ -1,6 +1,11 @@
+#This is the first file to load
+#It create loops to call 2 files: "02 Read.R" and "03 Tidy.R"
+#Raw data files will be converted into tidy data and stored in "/Tidy Data/"
+
 #Load package
 library(pacman)
-p_load(tidyverse,rio,readxl,janitor,lubridate,magrittr)
+p_load(tidyverse,readxl,janitor,magrittr)
+
 #Read file list in 'raw data' folder
 raw_list <- list.files(path='Raw Data/', pattern="*.xls")
 

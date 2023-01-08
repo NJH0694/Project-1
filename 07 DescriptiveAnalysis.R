@@ -30,46 +30,9 @@ cf4 <- cf3 %>%
   mutate(other = other / total_pipe *100) %>%
   mutate(good_pipe = good_pipe / total_pipe *100)
 
-cf4 %<>%
-  mutate(kiln = case_when(kiln == "L" ~ 1, 
-                          kiln == "G1" ~ 2, 
-                          kiln == "G2" ~ 3)) %>%
-  mutate(kiln = as.integer(kiln)) %>%
-  print()
-
 cf4 %>%
-  select(-8) %>%
-  cor() %>%
-  round(2)
-
-cf4 %>%
-  select(-8 & -15:-17) %>%
-  cor() %>%
-  round(2) %>%
-  corrplot(
-    type = 'upper',
-    diag = FALSE
-  )
-
-#Product DN150
-cf4 %>%
-  filter(product == "DN150") %>%
-  filter(extruder_num == 1 | extruder_num == 3) %>%
   filter(dryer_num > 5) %>%
-  select(-8 & -15:-17) %>%
-  cor() %>%
-  round(2) %>%
-  corrplot(
-    type = 'upper',
-    diag = FALSE
-  )
-
-#Product DN225/175
-cf4 %>%
-  filter(product == "DN225/175") %>%
-  filter(extruder_num == 2 | extruder_num == 7) %>%
-  filter(dryer_num > 5) %>%
-  select(-8 & -15:-17) %>%
+  select(-1:-8 & -15:-17) %>%
   cor() %>%
   round(2) %>%
   corrplot(
@@ -92,7 +55,11 @@ cf5 <- cf4 %>%
 #Visualize with boxplot
 cf5 %>%
   ggplot(aes(x=extruder_num, y=bend_pipe, fill=kiln)) +
-  geom_boxplot()
+  geom_boxplot() +
+  labs(title = "Bend pipe rate by extruder number", element_text = 20) +
+  theme(axis.text.x = element_text(size = 11, face ="bold"),
+        legend.text = element_text(size = 11),
+        plot.title = element_text(size = 16, hjust=0.5))
 
 #t.test for 2 variable
 t.test(bend_pipe ~ extruder_num, data=cf5)
@@ -127,3 +94,4 @@ fit3 <-
 fit3
 fit3 %>% summary()
 fit3 %>% TukeyHSD()
+
