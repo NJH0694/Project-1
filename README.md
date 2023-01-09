@@ -1,6 +1,6 @@
 # Defect Analysis with Machine Learning
 
-https://medium.com/@ngjenhwa01/defect-analysis-with-machine-learning-d79f4d69c3b9
+https://medium.com/@ngjenhwa01/d79f4d69c3b9?source=friends_link&sk=9fcbf5dc897dc786d3aa6e1f76a08746
 
 ![Alt text](https://github.com/NJH0694/Project-1/blob/main/Plots/Rplot01.png?raw=true)
 
