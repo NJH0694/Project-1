@@ -5,11 +5,11 @@
 
 #Read raw data file name and create tidied file name
 file_raw <- paste0('Raw Data/',raw_list[i])
-file_tidy <- paste0('Tidy Data/', str_replace(raw_list[i],'xls','csv'))
+file_tidy <- paste0('Tidy Data/', str_replace(raw_list[i],'xlsx','csv'))
 dir.create('Tidy Data', showWarnings = FALSE)
 
 #Read xls and convert to tibble (might takes few second)
-file_read <- as_tibble(read_xls(path=file_raw, range="A3:AZ70"))
+file_read <- as_tibble(read_xlsx(path=file_raw,col_names=FALSE, range="A1:AZ70"))
 file_read
 #Store kiln variable before subsetting
 v_1 <- file_read[3,13] %>%
